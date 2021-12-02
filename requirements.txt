@@ -1,0 +1,14 @@
+sacred
+easydict
+scipy
+kornia
+einops
+timm
+opencv-python
+scikit-image
+imgaug
+tqdm
+hostlist
+pycocotools
+scikit-learn==1.0.1
+faiss-gpu

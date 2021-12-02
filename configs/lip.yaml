@@ -1,0 +1,38 @@
+seed: 2021
+num_epochs: 100
+eval_interval: 1
+eval_only: 0
+
+lr_pow: 0.5
+lr: 0.00002
+optimizer: adam
+weight_decay: 0.0005
+
+dataset:
+  num_workers: 4
+  root_dir_pseudo_label: train/pseudo_label
+  root_dir_cls_feat: train/cls_feat
+  root_dir_lip: data/LIP
+  repeat: 0
+  resize: 320
+  pseudo_label_size: 40
+  train_batch_size: 256
+  val_batch_size: 64
+  split: train
+  range_start: -1
+  range_end: -1
+model:
+  teacher_update_interval: 3,3,3,2
+  bootstrapping_start_epoch: 3
+  loss:
+    weights: 1,0.3,1
+  encoder:
+    arch: vit_small
+    patch_size: 8
+    pretrained_weight: weight/dino/dino_deitsmall8_pretrain.pth
+    fix: 1
+    lr_scale: 0.1
+  decoder:
+    pretrained_weight: -1
+    n_things: 16
+    n_stuff: 0
