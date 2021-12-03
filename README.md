@@ -7,7 +7,7 @@ Xianzhe Xu,
 [Hao Li](https://scholar.google.com/citations?user=pHN-QIwAAAAJ&hl=zh-CN),
 [Rong Jin](https://scholar.google.com/citations?user=CS5uNscAAAAJ&hl=zh-CN)
 
-[[Preprint](https://arxiv.org/abs/xxx)]
+[[Preprint](https://arxiv.org/abs/2112.01515)]
 
 ## Getting Started
 
@@ -147,7 +147,7 @@ If you find our work useful in your research, please consider citing:
     @article{yin2021transfgu,
       title={TransFGU: A Top-down Approach to Fine-Grained Unsupervised Semantic Segmentation},
       author={Zhaoyun, Yin and Pichao, Wang and Fan, Wang and Xianzhe, Xu and Hanling, Zhang and Hao, Li and Rong, Jin},
-      journal={arXiv preprint arXiv:xxx},
+      journal={arXiv preprint arXiv:2112.01515},
       year={2021}
     }
 
