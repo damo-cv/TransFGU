@@ -42,7 +42,7 @@ def thingstuff_bootstrap_loss(masks, pseudo_label=None,
     else:
         loss_cat = F.cross_entropy(masks, bootstrapped_pseudo_labels, reduce=False)
 
-    mask_topk = masks[:, 1:].view(N, N_cls_fgbg - 1, h, w).softmax(1).topk(N_cls_fgbg - 1, dim=1)[0]
+    mask_topk = masks.view(N, N_cls_fgbg, h, w).softmax(1).topk(N_cls_fgbg, dim=1)[0]
     loss_uncertainty = 1 - (mask_topk[:, 0] - mask_topk[:, 1])
 
     return loss_cat, loss_uncertainty, bootstrapped_pseudo_labels
