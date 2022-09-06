@@ -24,6 +24,7 @@ dataset:
 model:
   teacher_update_interval: 5,5,5,5,4,4,4,4,4,3
   bootstrapping_start_epoch: 5
+  use_ddp: 1
   loss:
     weights: 1,0.3,1
   encoder:

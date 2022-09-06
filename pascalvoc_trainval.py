@@ -22,6 +22,7 @@ import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 from torch.utils.data import DataLoader, Dataset, ConcatDataset
 from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.nn.parallel import DataParallel as DP
 from torch.utils.data.distributed import DistributedSampler
 from torchvision import transforms as pth_transforms
 
@@ -384,14 +385,17 @@ def main(_run, _log):
 
     model_init_weights = {'encoder_init_weights': copy.deepcopy(model.encoder.state_dict()),
                           'decoder_init_weights': copy.deepcopy(model.decoder.state_dict())}
-
+    use_ddp = cfg.model.use_ddp == 1
     if torch.cuda.is_available():
         model.cuda()
         if torch.cuda.device_count() > 1:
             _log.info(f"using {torch.cuda.device_count()} gpus")
-            init_process()
-            model = DDP(model, find_unused_parameters=True)
-            sync_model('sync_dir', model)
+            if use_ddp:
+                init_process()
+                model = DDP(model, find_unused_parameters=True)
+                sync_model('sync_dir', model)
+            else:
+                model = DP(model)
 
     paras = get_params_groups(model, cfg)
     if cfg.optimizer == 'adam':
@@ -418,7 +422,7 @@ def main(_run, _log):
         epoch_iter = 0
         for epoch in range(cfg.num_epochs):
 
-            sampler = DistributedSampler(train_dataset_pascalvoc, shuffle=True) if torch.cuda.device_count() > 1 else None
+            sampler = DistributedSampler(train_dataset_pascalvoc, shuffle=True) if torch.cuda.device_count() > 1 and use_ddp else None
             train_loader = DataLoader(train_dataset_pascalvoc, batch_size=cfg.dataset.train_batch_size,
                                       shuffle=False if sampler else True,
                                       num_workers=cfg.dataset.num_workers,
