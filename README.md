@@ -9,6 +9,10 @@ Xianzhe Xu,
 
 [[Preprint](https://arxiv.org/abs/2112.01515)]
 
+
+News: TransFGU is accepted as a paper for an oral presentation at ECCV'2022!
+
+
 ## Getting Started
 
 Create the environment
