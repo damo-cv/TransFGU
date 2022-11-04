@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 - MS-COCO Dataset: Download the [trainset](http://images.cocodataset.org/zips/train2017.zip), [validset](http://images.cocodataset.org/zips/val2017.zip), [annotations](http://calvin.inf.ed.ac.uk/wp-content/uploads/data/cocostuffdataset/stuffthingmaps_trainval2017.zip) and the [json files](http://images.cocodataset.org/annotations/annotations_trainval2017.zip), place the extracted files into `root/data/MSCOCO`.
 - PascalVOC Dataset: Download [training/validation data](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar), place the extracted files into `root/data/PascalVOC`.
-- Cityscapes Dataset: Download [leftImg8bit_trainvaltest.zip](http://images.cocodataset.org/zips/train2017.zip) and [gtFine_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=1), place the extracted files into `root/data/Cityscapes`.
+- Cityscapes Dataset: Download [leftImg8bit_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=3) and [gtFine_trainvaltest.zip](https://www.cityscapes-dataset.com/file-handling/?packageID=1), place the extracted files into `root/data/Cityscapes`.
 - LIP Dataset: Download [TrainVal_images.zip](https://drive.google.com/file/d/0BzvH3bSnp3E9cVl3b3pKdmFlclE/view?usp=sharing&resourcekey=0-0crLyOF_Tj-hPDLS89DtqA) and [TrainVal_parsing_annotations.zip](https://drive.google.com/file/d/15tifhBogDs_oBUKaUf362vzZTlIdzktv/view?usp=sharing), place the extracted files into `root/data/LIP`.
 
 the structure of dataset folders should be as follow:
