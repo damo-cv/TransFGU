@@ -1,11 +1,10 @@
-sacred
+sacred==0.8.2
 easydict
 scipy
-kornia
 einops
 timm
 opencv-python
-scikit-image
+scikit-image==0.19.1
 imgaug
 tqdm
 hostlist
