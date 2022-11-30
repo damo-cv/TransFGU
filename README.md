@@ -148,7 +148,7 @@ To train and evaluate our method on different datasets under desired granularity
 ## Citation
 If you find our work useful in your research, please consider citing:
 
-    @inproceedings{yin2021transfgu,
+    @inproceedings{yin2022transfgu,
       title		=	{TransFGU: A Top-down Approach to Fine-Grained Unsupervised Semantic Segmentation},
       author	=	{Zhaoyun, Yin and Pichao, Wang and Fan, Wang and Xianzhe, Xu and Hanling, Zhang and Hao, Li and Rong, Jin},
 	  booktitle	=	{European Conference on Computer Vision},
