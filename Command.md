@@ -41,7 +41,10 @@ CUDA_VISIBLE_DEVICES=0 python cocostuff_crop.py
 CUDA_VISIBLE_DEVICES=0 python cocostuff_generate_pseudo_label.py with dataset.train_batch_size=8 model.decoder.n_things=12 model.decoder.n_stuff=15
 # To train the model
 CUDA_VISIBLE_DEVICES=0,1,2,3 python cocostuff_trainval.py -F train/cocostuff with dataset.num_workers=32 model.teacher_update_interval=2 model.bootstrapping_start_epoch=2 model.decoder.n_things=12 model.decoder.n_stuff=15
+# To train the model (on the curated data)
+CUDA_VISIBLE_DEVICES=0,1,2,3 python cocostuff_trainval.py -F train/cocostuff with dataset.num_workers=32 model.teacher_update_interval=1 model.bootstrapping_start_epoch=1 model.decoder.n_things=12 model.decoder.n_stuff=15 dataset.is_curated=1 lr=2.2e-4
 ```
+
 
 #### For COCO-Stuff-171:
 ```bash
