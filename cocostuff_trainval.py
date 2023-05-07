@@ -77,7 +77,8 @@ def load_train_dataset_coco(cfg, split='train', pseudo_label_save_dir=None, num_
                        num_stuff=cfg.model.decoder.n_stuff,
                        num_things=cfg.model.decoder.n_things,
                        num_samples=num_samples,
-                       orientation=0)
+                       orientation=0,
+                       is_curated=cfg.dataset.is_curated)
 
     return dataset
 
@@ -99,7 +100,8 @@ def load_val_dataset_coco(cfg, split='val', pseudo_label_save_dir=None, num_samp
                        num_stuff=cfg.model.decoder.n_stuff,
                        num_things=cfg.model.decoder.n_things,
                        num_samples=num_samples,
-                       orientation=0)
+                       orientation=0,
+                       is_curated=cfg.dataset.is_curated)
     return dataset
 
 class MSCOCO17(Dataset):
@@ -114,6 +116,7 @@ class MSCOCO17(Dataset):
                  transform=None,
                  num_samples=None,
                  orientation=0,
+                 is_curated=0
                  ):
         assert split in ['train', 'val']
         self.split = 'train2017' if split == 'train' else 'val2017'
@@ -125,12 +128,18 @@ class MSCOCO17(Dataset):
         self.num_samples = num_samples
         self.num_things = num_things
         self.num_stuff = num_stuff
+        self.is_curated = is_curated == 1
 
         self.JPEGPath = f"{self.dataset_root_dir}/images/{self.split}"
         self.PNGPath = f"{self.dataset_root_dir}/annotations/{self.split}"
         self.annFile = f"{self.dataset_root_dir}/annotations/instances_{self.split}.json"
         self.coco = COCO(self.annFile)
         all_ids = self.coco.imgToAnns.keys()
+
+        if self.is_curated:
+            with open(os.path.join('dataloaders', f'curated_{split}.txt')) as f:
+                self.curated = f.readlines()
+            self.curated = list(map(lambda elem: elem.strip(), self.curated))
 
         samples_list_1 = []
         samples_list_2 = []
@@ -140,11 +149,12 @@ class MSCOCO17(Dataset):
             img_meta = self.coco.loadImgs(id)
             assert len(img_meta) == 1
             H, W = img_meta[0]['height'], img_meta[0]['width']
-
-            if H < W:
-                samples_list_1.append(id)
-            else:
-                samples_list_2.append(id)
+            name = img_meta[0]['file_name'].split('.')[0]
+            if (self.is_curated and name in self.curated) or not self.is_curated:
+                if H < W:
+                    samples_list_1.append(id)
+                else:
+                    samples_list_2.append(id)
 
         if orientation == 0:
             samples_list = samples_list_1 + samples_list_2

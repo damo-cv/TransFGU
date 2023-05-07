@@ -21,6 +21,7 @@ dataset:
   split: train
   range_start: -1
   range_end: -1
+  is_curated: 0
 model:
   teacher_update_interval: 3,3,3,2
   bootstrapping_start_epoch: 3
