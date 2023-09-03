@@ -435,7 +435,7 @@ def main(_run, _log):
 
             if (epoch + 1) % cfg.eval_interval == 0:
                 with torch.no_grad():
-                    eval_pascalvoc(cfg, model, val_loader_pascalvoc, history, device, epoch, )
+                    eval_pascalvoc(cfg, model, val_loader_pascalvoc, history, device, epoch, None)
                     if history['val']['metric'][-1] > history['val']['best_metric']:
                         history['val']['best_metric'] = history['val']['metric'][-1]
                         save_network_checkpoint(exp_ckpt_dir, model.module.encoder, model.module.decoder, is_best=True)
